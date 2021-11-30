@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<!--리액트 안에는 document.query같은 것 웬만하면 쓰지 말기-->
 <head>
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
@@ -54,11 +54,19 @@
             onSubmit = (e) => {
                 e.preventDefault();
                 if (parseInt(this.state.value) === this.state.first * this.state.second) {
-                    this.setState({
-                        result: `${this.state.first * this.state.second} 정답`,
-                        first: Math.ceil(Math.random() * 9),
-                        second: Math.ceil(Math.random() * 9),
-                        value: '',
+                    this.setState((prevState) => {
+                        //예전 값에서 현재 값으로 만들 때는 함수를 쓰기
+                        //state 안에 this.state가 들어가면 함수 쓰는 걸로 외우기
+                        //this.setState가 여러번 있을 경우 문제 생김
+                        return {
+                            //원래는 함수가 아니라면 this.state.first로 해야됨
+                            //함수 안에서는 state가 인자로 오기에 first가 됨
+                            result: `${prevState.first * prevState.second} 정답`,
+                            //this.state.value도 가능함. input으로 입력했다는 점을 이용
+                            first: Math.ceil(Math.random() * 9),
+                            second: Math.ceil(Math.random() * 9),
+                            value: '',
+                        }
                     });
                 }
                 else {
@@ -66,16 +74,26 @@
                         result: '땡',
                         value: '',
                     });
+                    //dom 에 바로 접근하고 싶을 때 이렇게 하기. 
+                    //밑에 input ref={(c)=>this.input=c}
+                    this.input.focus();
                 }
+                
             }
             onChange = (e) => this.setState({ value: e.target.value, })
+            
             render() {
+                //입력을 뭐든 하기만 하면 다 렌더링이 됨. 
+                //setstate시 무조건 render함수가 실행됨
+                //함수를 밖으로 빼는 이유가 render 작업마다 함수 생성되서 그럼
+                console.log("렌더링");
                 return (
                     //<React.Fragment> 가 <> 역할
                     <div>
                         <div>{this.state.first}곱하기 {this.state.second}는?</div>
                         <form onSubmit={this.onSubmit}>
-                            <input type="number" value={this.state.value} onChange={this.onChange} />
+                            
+                            <input ref={(c)=>{this.input=c;}}type="number" value={this.state.value} onChange={this.onChange} />
                             <button>입력</button>
                         </form>
                         <div>{this.state.result}</div>
