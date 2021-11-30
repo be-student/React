@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+
+<body>
+    <div id="root">
+        <!--button Like button-->
+    </div>
+
+    <script type="text/babel">
+        //babel이 JSX문법 코드를 create element로 바꿔줌.
+        //const e= React.createElement;
+        //클래스 하나가 1컴포넌트
+        //대문자 스타팅 tag는 JSX임, 소문자 html
+        //JSX는 대부분 컴포넌트임. 
+        /*class LikeButton extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    liked:false,
+                };
+            }
+            render(){
+                //버튼을 만들 것이다.
+                
+                //return e('button',{onClick:()=>{this.setState({liked:true})},type:`submit`},
+                //this.state.liked===true?`Liked`:'Like');
+                //XML이고 무조건 닫는 / 표시가 필수이다.
+                return <button type="submit" onClick={()=>{ this.setState({ liked : true})}}>
+                    {this.state.liked===true?"Liked":"Like"}
+                </button>;
+                
+            }
+        }
+        */
+        class GuGuDan extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    first: Math.ceil(Math.random() * 9),
+                    second: Math.ceil(Math.random() * 9),
+                    value: '',
+                    result: '',
+                }
+            }
+            //js와 무조건 jsx를 분리해야 편함. 
+            //밖으로 빼면 화살표 함수 무조건. 없으면 bind써야됨
+            onSubmit = (e) => {
+                e.preventDefault();
+                if (parseInt(this.state.value) === this.state.first * this.state.second) {
+                    this.setState({
+                        result: `${this.state.first * this.state.second} 정답`,
+                        first: Math.ceil(Math.random() * 9),
+                        second: Math.ceil(Math.random() * 9),
+                        value: '',
+                    });
+                }
+                else {
+                    this.setState({
+                        result: '땡',
+                        value: '',
+                    });
+                }
+            }
+            onChange = (e) => this.setState({ value: e.target.value, })
+            render() {
+                return (
+                    //<React.Fragment> 가 <> 역할
+                    <div>
+                        <div>{this.state.first}곱하기 {this.state.second}는?</div>
+                        <form onSubmit={this.onSubmit}>
+                            <input type="number" value={this.state.value} onChange={this.onChange} />
+                            <button>입력</button>
+                        </form>
+                        <div>{this.state.result}</div>
+                    </div>
+                );
+            }
+        }
+    </script>
+    <script type="text/babel">
+        //ReactDOM.render(e(LikeButton),document.querySelector(`#root`));
+        //ReactDOM.render(<LikeButton/>,document.querySelector('#root'));
+        ReactDOM.render(<GuGuDan />, document.querySelector('#root'));
+    </script>
+</body>
+
+</html>
