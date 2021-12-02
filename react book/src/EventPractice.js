@@ -101,7 +101,7 @@ class EventPractice extends Component {
 
 export default EventPractice;
 */
-import { useState } from "react";
+import { useState } from 'react';
 
 const EventPractice = () => {
   /*
@@ -122,21 +122,21 @@ const EventPractice = () => {
   };
   */
   const onClick = () => {
-    alert(username + ":" + message);
+    alert(username + ':' + message);
     setForm({
-      username: "",
-      message: "",
+      username: '',
+      message: '',
     });
   };
   const onKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       onClick();
     }
   };
 
   const [form, setForm] = useState({
-    username: "",
-    message: "",
+    username: '',
+    message: '',
   });
   const { username, message } = form;
   const onChange = (e) => {
