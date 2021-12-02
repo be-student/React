@@ -409,6 +409,7 @@ class App extends Component {
 }
 export default App;
 */
+/*
 import { Component } from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import LifeCycleSample from './LifeCycleSample';
@@ -436,4 +437,11 @@ class App extends Component {
     );
   }
 }
+export default App;
+*/
+import Counter from './info';
+
+const App = () => {
+  return <Counter />;
+};
 export default App;
