@@ -33,12 +33,17 @@ const Info = () => {
     setNickName(e.target.value);
   };
   useEffect(() => {
+    /*
     console.log('렌더링이 완료되었습니다.');
     console.log({
       name,
       nickName,
     });
+    
   });
+    */
+    console.log('마운트 될 때만 실행');
+  }, []);
   return (
     <div>
       <div>
