@@ -108,6 +108,7 @@ const App = () => {
 
 export default App;
 */
+/*
 import { Component } from "react";
 class Subject extends Component {
   render() {
@@ -163,7 +164,7 @@ class TOC extends Component {
         <a href="3.html">Java Script</a>
       </li>,
     ];
-    */
+    
     return <ol>{list}</ol>;
   }
 }
@@ -325,7 +326,7 @@ class App extends Component {
               selected_content_id: id,
             });
           }}
-          */
+          
           onSelect={function (id) {
             this.setState({
               selected_content_id: id,
@@ -340,6 +341,69 @@ class App extends Component {
         {this.getContentComponent()}
       </div>
     );
+  }
+}
+export default App;
+*/
+/*
+import { Component } from "react";
+
+class App extends Component {
+  onchange = (e) => {
+    this.setState({
+      message: e.target.value,
+    });
+  };
+  state = {
+    message: "",
+  };
+  onsubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+    alert(e.value + "입력함");
+  };
+  render() {
+    return (
+      <>
+        <div>
+          <form onSubmit={this.onsubmit}>
+            <input
+              type="text"
+              value={this.state.message}
+              onChange={this.onchange}
+            />
+          </form>
+        </div>
+      </>
+    );
+  }
+}
+export default App;
+*/
+/*
+import { Component } from 'react';
+import ScrollBox from './ScrollBox';
+
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <ScrollBox ref={(ref) => (this.ScrollBox = ref)} />
+        <button onClick={() => this.ScrollBox.scrollToBottom()}>
+          맨 밑으로
+        </button>
+      </div>
+    );
+  }
+}
+export default App;
+*/
+import { Component } from 'react';
+import IterationSample from './IterationSample';
+
+class App extends Component {
+  render() {
+    return <IterationSample />;
   }
 }
 export default App;

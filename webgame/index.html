@@ -5,14 +5,11 @@
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
 </head>
-
 <body>
     <div id="root">
         <!--button Like button-->
     </div>
-
     <script type="text/babel">
         //babel이 JSX문법 코드를 create element로 바꿔줌.
         //const e= React.createElement;
@@ -93,7 +90,7 @@
                         <div>{this.state.first}곱하기 {this.state.second}는?</div>
                         <form onSubmit={this.onSubmit}>
                             
-                            <input ref={(c)=>{this.input=c;}}type="number" value={this.state.value} onChange={this.onChange} />
+                            <input ref={(c)=>{this.input=c;}} type="number" value={this.state.value} onChange={this.onChange} />
                             <button>입력</button>
                         </form>
                         <div>{this.state.result}</div>
