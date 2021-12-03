@@ -32,8 +32,8 @@ const Info = () => {
   const onChangeNickName = (e) => {
     setNickName(e.target.value);
   };
-  useEffect(() => {
-    /*
+  /*useEffect(() => {
+    
     console.log('렌더링이 완료되었습니다.');
     console.log({
       name,
@@ -41,9 +41,23 @@ const Info = () => {
     });
     
   });
-    */
+    
     console.log('마운트 될 때만 실행');
   }, []);
+  /*componentDidUpdate(prevProps,prevState){
+    if(prevProps.value!==this.props.value){
+      doSomething();
+    }
+  }
+  */
+  useEffect(() => {
+    console.log('effect');
+    console.log('name');
+    return () => {
+      console.log('cleanup');
+      console.log(name);
+    };
+  }, [name]);
   return (
     <div>
       <div>
