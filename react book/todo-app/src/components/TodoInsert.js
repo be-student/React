@@ -1,8 +1,10 @@
+// cd C:\Users\SongEunWoo\react\react book\todo-app
 import { useState, useCallback } from 'react';
 import { MdAdd } from 'react-icons/md';
 import './TodoInsert.scss';
 
-const TodoInsert = ({ onInsert }) => {
+const TodoInsert = (onInsert) => {
+  console.log(onInsert);
   const [value, setValue] = useState('');
 
   const onChange = useCallback((e) => {

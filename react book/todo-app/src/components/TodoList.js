@@ -1,3 +1,4 @@
+// cd C:\Users\SongEunWoo\react\react book\todo-app
 import TodoListItem from './TodoListItem';
 import './TodoList.scss';
 

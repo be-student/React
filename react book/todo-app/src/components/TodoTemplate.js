@@ -1,3 +1,4 @@
+// cd C:\Users\SongEunWoo\react\react book\todo-app
 import './TodoTemplate.scss';
 
 const TodoTemplate = ({ children }) => {
