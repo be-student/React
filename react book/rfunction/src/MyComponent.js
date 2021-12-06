@@ -136,3 +136,8 @@ class MyComponent extends Component {
 export default MyComponent;
 
 */
+const MyComponent = (props) => {
+  console.log(typeof props);
+  return <div>안녕하세요, 제 이름은 {props.children}</div>;
+};
+export default MyComponent;

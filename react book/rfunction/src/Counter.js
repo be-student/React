@@ -1,4 +1,4 @@
-/*import { Component } from 'react';
+/*=import { Component } from 'react';
 
 
 class Counter extends Component {
@@ -82,7 +82,7 @@ class Counter extends Component {
 
 export default Counter;
 */
-/*
+
 import { useReducer } from 'react';
 
 function changing(state, action) {
@@ -109,4 +109,3 @@ const Counter = () => {
   );
 };
 export default Counter;
-*/

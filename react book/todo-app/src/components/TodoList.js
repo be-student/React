@@ -2,6 +2,7 @@
 import TodoListItem from './TodoListItem';
 import './TodoList.scss';
 
+//받는 순서는 그냥 props의 순서와 동일함.
 const TodoList = ({ todos, onRemove, onToggle }) => {
   return (
     <div className="TodoList">

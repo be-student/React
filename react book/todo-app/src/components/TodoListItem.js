@@ -7,6 +7,7 @@ import {
 import cn from 'classnames';
 import './TodoListItem.scss';
 
+//cn은 클래스 내임 좀 편하게 가능한 것
 const TodoListItem = ({ todo, onRemove, onToggle }) => {
   const { id, text, checked } = todo;
 

@@ -3,8 +3,8 @@ import { useState, useCallback } from 'react';
 import { MdAdd } from 'react-icons/md';
 import './TodoInsert.scss';
 
-const TodoInsert = (onInsert) => {
-  console.log(onInsert);
+//value 일 입력했을 때 할 일
+const TodoInsert = ({ onInsert }) => {
   const [value, setValue] = useState('');
 
   const onChange = useCallback((e) => {

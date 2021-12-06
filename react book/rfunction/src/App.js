@@ -79,7 +79,6 @@ const App = () => {
 export default App;
 */
 
-/*
 import Counter from './Counter';
 
 const App = () => {
@@ -87,7 +86,7 @@ const App = () => {
 };
 
 export default App;
-*/
+
 /*
 import Say from './Say';
 
@@ -479,9 +478,38 @@ const App = () => {
 
 export default App;
 */
+/*
 import Average from './Average';
 
 const App = () => {
   return <Average />;
 };
 export default App;
+*/
+/*
+import hel from './hel';
+
+const App = () => {
+  return (
+    <div>
+      <hel name="123">name="123" </hel>
+    </div>
+  );
+};
+export default App;
+*/
+/*
+import MyComponent from './MyComponent';
+import hel from './hel';
+import { useState } from 'react';
+import {Component} from 'react';
+
+class App extends Component{
+  state = {
+    number: 0,
+  };
+  console.log(typeof this.state);
+  return <MyComponent name="123">리액트</MyComponent>;
+};
+export default App;
+*/
