@@ -1,7 +1,7 @@
 const path = require("path"); //노드에서 경로 조작하는 path라는 것 암기
 
 module.exports = {
-  name: "wordrelay", //그냥 이름
+  name: "wordrelay-setting", //그냥 이름
   mode: "development", // 실서비스: production
   devtool: "eval", // 실서비스: hidden-source-map 그냥 빠르게
   resolve: {
@@ -11,11 +11,22 @@ module.exports = {
   //app.js라는 파일 하나 만들어서 html이 실행 가능하게 하는 것임.
   entry: {
     app: ["./client"],
-  }, //client.jsx가 wordrelay를 불러옴
+  },
+  //client.jsx가 wordrelay를 불러옴
   //웹팩이 알아서 워드 릴레이를 알아서 해줌. 따라서 빼도 됨.
   //확장자도 제거해도 됨. resolve에 확장자를 설정함
   //
-
+  module: {
+    rules: [
+      {
+        test: /\.jsx?/, //정규 표현식임 jsx파일에 룰 적용
+        loader: "babel-loader",
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+        },
+      },
+    ],
+  },
   output: {
     path: path.join(__dirname, "dist"),
     filename: "app.js",
