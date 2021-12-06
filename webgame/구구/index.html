@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <!--리액트 안에는 document.query같은 것 웬만하면 쓰지 말기-->
+
 <head>
     <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
+
 <body>
     <div id="root">
         <!--button Like button-->
@@ -36,6 +38,49 @@
             }
         }
         */
+       //그냥 for은 htmlFor/ class 는 className
+        const GuGuDan = () => {
+            const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+            const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+            const [value, setValue] = React.useState('');
+            const [result, setResult] = React.useState('');
+            const inputEl = React.useRef(null);
+
+            const onSubmitForm = (e) => {
+              e.preventDefault();
+              if (parseInt(value) === first * second) {
+                setResult('정답');
+                setFirst(Math.ceil(Math.random() * 9));
+                setSecond(Math.ceil(Math.random() * 9));
+                setValue('');
+                inputEl.current.focus();
+              } else {
+                setResult('땡');
+                setValue('');
+                inputEl.current.focus();
+              }
+            };
+            return (
+                <div>
+                    <div>{first} 곱하기 {second}는?</div>
+                    <form onSubmit={onSubmitForm}>
+                        <input
+                            ref={inputEl}
+                            type="number"
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                        />
+                        <button>입력!</button>
+                    </form>
+                    <div id="result">{result}</div>
+                </div>
+                );
+            };
+
+        //setResult((prevResult)=>{
+        //    return '정답 '+value;
+        //})으로 처리하면 비동기 문제가 발생하지 않음
+        {/*
         class GuGuDan extends React.Component {
             constructor(props) {
                 super(props);
@@ -98,6 +143,7 @@
                 );
             }
         }
+    */}
     </script>
     <script type="text/babel">
         //ReactDOM.render(e(LikeButton),document.querySelector(`#root`));
