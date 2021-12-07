@@ -3,3 +3,10 @@
 .checked {
   text-decoration: line-through;
 }
+.comment__item {
+  button {
+    width: 80px;
+    text-align: center;
+  }
+  display: flex;
+}

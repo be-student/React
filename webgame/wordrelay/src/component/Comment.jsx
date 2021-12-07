@@ -9,6 +9,7 @@ const Comment = () => {
     {
       id: 1,
       dat: "1st",
+      checked: false,
     },
   ]);
   const onChange = (e) => {
@@ -19,6 +20,7 @@ const Comment = () => {
     const nextArr = data.concat({
       id: num,
       dat: value,
+      checked: false,
     });
     setData(nextArr);
     setValue("");
@@ -33,7 +35,13 @@ const Comment = () => {
     });
     setData(nextArr);
   };
-  const onCheck = (e) => {};
+  const onCheck = (e) => {
+    if (e.target.innerText === "unChecked") {
+      e.target.innerText = "checked";
+    } else {
+      e.target.innerText = "unChecked";
+    }
+  };
   return (
     <div>
       <div>comment</div>
@@ -44,9 +52,11 @@ const Comment = () => {
       <ul>
         {data.map((dat) => {
           return (
-            <li key={dat.id}>
+            <li className="comment__item" key={dat.id}>
               <button onClick={onCheck}>checked</button>
-              <div className="unChecked">{dat.dat}</div>
+              <div className={dat.checked ? "checked" : "unChecked"}>
+                {dat.dat}
+              </div>
               <button id={dat.id} onClick={onClick}>
                 X
               </button>
