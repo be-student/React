@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<!--리액트 안에는 document.query같은 것 웬만하면 쓰지 말기-->
+
+<head>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!--button Like button-->
+    </div>
+    <script type="text/babel">
+        //babel이 JSX문법 코드를 create element로 바꿔줌.
+        //const e= React.createElement;
+        //클래스 하나가 1컴포넌트
+        //대문자 스타팅 tag는 JSX임, 소문자 html
+        //JSX는 대부분 컴포넌트임. 
+        /*class LikeButton extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    liked:false,
+                };
+            }
+            render(){
+                //버튼을 만들 것이다.
+                
+                //return e('button',{onClick:()=>{this.setState({liked:true})},type:`submit`},
+                //this.state.liked===true?`Liked`:'Like');
+                //XML이고 무조건 닫는 / 표시가 필수이다.
+                return <button type="submit" onClick={()=>{ this.setState({ liked : true})}}>
+                    {this.state.liked===true?"Liked":"Like"}
+                </button>;
+                
+            }
+        }
+        */
+       //그냥 for은 htmlFor/ class 는 className
+        const GuGuDan = () => {
+            const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9));
+            const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9));
+            const [value, setValue] = React.useState('');
+            const [result, setResult] = React.useState('');
+            const inputEl = React.useRef(null);
+
+            const onSubmitForm = (e) => {
+              e.preventDefault();
+              if (parseInt(value) === first * second) {
+                setResult('정답');
+                setFirst(Math.ceil(Math.random() * 9));
+                setSecond(Math.ceil(Math.random() * 9));
+                setValue('');
+                inputEl.current.focus();
+              } else {
+                setResult('땡');
+                setValue('');
+                inputEl.current.focus();
+              }
+            };
+            return (
+                <div>
+                    <div>{first} 곱하기 {second}는?</div>
+                    <form onSubmit={onSubmitForm}>
+                        <input
+                            ref={inputEl}
+                            type="number"
+                            value={value}
+                            onChange={(e) => setValue(e.target.value)}
+                        />
+                        <button>입력!</button>
+                    </form>
+                    <div id="result">{result}</div>
+                </div>
+                );
+            };
+
+        //setResult((prevResult)=>{
+        //    return '정답 '+value;
+        //})으로 처리하면 비동기 문제가 발생하지 않음
+        {/*
+        class GuGuDan extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    first: Math.ceil(Math.random() * 9),
+                    second: Math.ceil(Math.random() * 9),
+                    value: '',
+                    result: '',
+                }
+            }
+            //js와 무조건 jsx를 분리해야 편함. 
+            //밖으로 빼면 화살표 함수 무조건. 없으면 bind써야됨
+            onSubmit = (e) => {
+                e.preventDefault();
+                if (parseInt(this.state.value) === this.state.first * this.state.second) {
+                    this.setState((prevState) => {
+                        //예전 값에서 현재 값으로 만들 때는 함수를 쓰기
+                        //state 안에 this.state가 들어가면 함수 쓰는 걸로 외우기
+                        //this.setState가 여러번 있을 경우 문제 생김
+                        return {
+                            //원래는 함수가 아니라면 this.state.first로 해야됨
+                            //함수 안에서는 state가 인자로 오기에 first가 됨
+                            result: `${prevState.first * prevState.second} 정답`,
+                            //this.state.value도 가능함. input으로 입력했다는 점을 이용
+                            first: Math.ceil(Math.random() * 9),
+                            second: Math.ceil(Math.random() * 9),
+                            value: '',
+                        }
+                    });
+                }
+                else {
+                    this.setState({
+                        result: '땡',
+                        value: '',
+                    });
+                    //dom 에 바로 접근하고 싶을 때 이렇게 하기. 
+                    //밑에 input ref={(c)=>this.input=c}
+                    this.input.focus();
+                }
+                
+            }
+            onChange = (e) => this.setState({ value: e.target.value, })
+            
+            render() {
+                //입력을 뭐든 하기만 하면 다 렌더링이 됨. 
+                //setstate시 무조건 render함수가 실행됨
+                //함수를 밖으로 빼는 이유가 render 작업마다 함수 생성되서 그럼
+                console.log("렌더링");
+                return (
+                    //<React.Fragment> 가 <> 역할
+                    <div>
+                        <div>{this.state.first}곱하기 {this.state.second}는?</div>
+                        <form onSubmit={this.onSubmit}>
+                            
+                            <input ref={(c)=>{this.input=c;}} type="number" value={this.state.value} onChange={this.onChange} />
+                            <button>입력</button>
+                        </form>
+                        <div>{this.state.result}</div>
+                    </div>
+                );
+            }
+        }
+    */}
+    </script>
+    <script type="text/babel">
+        //ReactDOM.render(e(LikeButton),document.querySelector(`#root`));
+        //ReactDOM.render(<LikeButton/>,document.querySelector('#root'));
+        ReactDOM.render(<GuGuDan />, document.querySelector('#root'));
+    </script>
+</body>
+
+</html>
