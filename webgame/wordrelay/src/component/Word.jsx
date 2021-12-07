@@ -4,6 +4,7 @@ const Word = () => {
   const [word, setWord] = useState("시작");
   const [value, setValue] = useState("");
   const [result, setResult] = useState("");
+  const [visible, setVisible] = useState(false);
   const onChange = (e) => {
     setValue(e.target.value);
   };
@@ -20,18 +21,29 @@ const Word = () => {
   };
   return (
     <div>
-      <div>Word</div>
-      <div>{word}</div>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          value={value}
-          onChange={onChange}
-          placeholder="끝말 잇기"
-        ></input>
-        <button type="submit">Submit</button>
-      </form>
-      <div>결과 {result}</div>
+      <input
+        type="button"
+        value="visible"
+        onClick={() => setVisible(!visible)}
+      />
+      <div>
+        {visible && (
+          <div>
+            <div>Word</div>
+            <div>{word}</div>
+            <form onSubmit={onSubmit}>
+              <input
+                type="text"
+                value={value}
+                onChange={onChange}
+                placeholder="끝말 잇기"
+              ></input>
+              <button type="submit">Submit</button>
+            </form>
+            <div>결과 {result}</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

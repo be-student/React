@@ -40,34 +40,45 @@ const App = () => {
   // ]);
   const [todos, setTodos] = useState(createBulkTodos);
   const nextId = useRef(4);
-  const onInsert = useCallback((text) => {
-    const todo = {
-      id: nextId.current,
-      text,
-      checked: false,
-    };
-    setTodos((todos) => todos.concat(todo));
-    //todos=todos.concat(todo);
-    //이거 쓰기 싫어서 업데이터를 만드는 거다 라는 점.
-    //밑에 코드가 가장 정확하게 나옴.업데이트를 쓰면 처리는 됨
-    //링크 https://velog.io/@cada/React%EC%9D%98-setState%EA%B0%80-%EC%9E%98%EB%AA%BB%EB%90%9C-%EA%B0%92%EC%9D%84-%EC%A3%BC%EB%8A%94-%EC%9D%B4%EC%9C%A0
-    //this.setState((state, props) => {
-    //   return {count: state.count + 1}
-    // });
-    //이렇게 박아버리면 불변성도 깨고, 동기를 쓸 수 있음.
-    nextId.current += 1;
-    //모든 문제는 비동기라는 점에서 나옴. nextId는 동기화 됨.
-  }, []);
-  const onRemove = useCallback((id, e) => {
-    setTodos((todos) => todos.filter((todo) => todo.id !== id));
-  }, []);
-  const onToggle = useCallback((id) => {
-    setTodos((todos) =>
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo,
-      ),
-    );
-  }, []);
+  const onInsert = useCallback(
+    (text) => {
+      const todo = {
+        id: nextId.current,
+        text,
+        checked: false,
+      };
+      setTodos(() => todos.concat(todo));
+      //todos=todos.concat(todo);
+      //이거 쓰기 싫어서 업데이터를 만드는 거다 라는 점.
+      //밑에 코드가 가장 정확하게 나옴.업데이트를 쓰면 처리는 됨
+      //링크 https://velog.io/@cada/React%EC%9D%98-setState%EA%B0%80-%EC%9E%98%EB%AA%BB%EB%90%9C-%EA%B0%92%EC%9D%84-%EC%A3%BC%EB%8A%94-%EC%9D%B4%EC%9C%A0
+      //this.setState((state, props) => {
+      //   return {count: state.count + 1}
+      // });
+      //이렇게 박아버리면 불변성도 깨고, 동기를 쓸 수 있음.
+      nextId.current += 1;
+      //모든 문제는 비동기라는 점에서 나옴. nextId는 동기화 됨.
+      console.log(todos, todo, nextId);
+    },
+    [todos],
+  );
+  const onRemove = useCallback(
+    (id, e) => {
+      console.log(e);
+      setTodos(todos.filter((todo) => todo.id !== id));
+    },
+    [todos],
+  );
+  const onToggle = useCallback(
+    (id) => {
+      setTodos(
+        todos.map((todo) =>
+          todo.id === id ? { ...todo, checked: !todo.checked } : todo,
+        ),
+      );
+    },
+    [todos],
+  );
   return (
     <TodoTemplate>
       <TodoInsert onInsert={onInsert} />

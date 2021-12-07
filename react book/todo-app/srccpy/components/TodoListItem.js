@@ -9,11 +9,11 @@ import './TodoListItem.scss';
 import React from 'react';
 
 //cn은 클래스 내임 좀 편하게 가능한 것
-const TodoListItem = ({ todo, onRemove, onToggle, style }) => {
+const TodoListItem = ({ todo, onRemove, onToggle }) => {
   const { id, text, checked } = todo;
 
   return (
-    <div className="TodoListItem" style={style}>
+    <div className="TodoListItem">
       <div className={cn('checkbox', { checked })} onClick={() => onToggle(id)}>
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
 
