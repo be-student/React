@@ -25,6 +25,9 @@ const NewsListBlock = styled.div`
 const NewsList = ({ category }) => {
   // const [articles, setArticles] = useState(null);
   // const [loading, setLoading] = useState(false);
+  //여기다 useEffect앞 async를 안 쓰는 이유는
+  //useEffect가 반환하는 것은 promise가 아닌 뒷정리 함수.
+  //따라서 useEffect 내에 함수 만들 필요 있음
   // useEffect(() => {
   //   const fetchData = async () => {
   //     setLoading(true);
@@ -62,6 +65,7 @@ const NewsList = ({ category }) => {
   if (error) {
     return <NewsListBlock>에러 발생</NewsListBlock>;
   }
+  //이거는 promise랑 엮임. promise가 아니면 다음줄 삭제
   const { articles } = response.data;
   return (
     <NewsListBlock>

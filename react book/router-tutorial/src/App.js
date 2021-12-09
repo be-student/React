@@ -42,13 +42,9 @@ import { Routes, Route, Link, Outlet } from "react-router-dom";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 const Home = () => {
-  return (
-    <main style={{ padding: "1rem 0" }}>
-      <h2>Home</h2>
-    </main>
-  );
+  return <h2>Home</h2>;
 };
-
+//매개변수 property 이름과 맞춰줘야 됨. users
 const Users = ({ users }) => {
   return (
     <>
@@ -57,7 +53,7 @@ const Users = ({ users }) => {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            <Link to={`/users/${user.id}`}>{user.fullName}</Link>
+            <Link to={`/users/${user.fullName}`}>{user.fullName}</Link>
           </li>
         ))}
       </ul>
@@ -95,11 +91,12 @@ const Layout = () => {
   );
 };
 const User = () => {
-  const { userId } = useParams();
-
+  //path :뒤에 이름과 맞춰줘야 됨.
+  const { users } = useParams();
+  console.log(users);
   return (
     <>
-      <h2>User: {userId}</h2>
+      <h2>User: {users}</h2>
 
       <Link to="/users">Back to Users</Link>
     </>
@@ -118,10 +115,11 @@ const App = () => {
 
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route path="/" element={<Home />} />
+
           <Route path="home" element={<Home />} />
           <Route path="users" element={<Users users={users} />}>
-            <Route path=":userId" element={<User />} />
+            <Route path=":users" element={<User />} />
           </Route>
           <Route path="*" element={<NoMatch />} />
         </Route>
