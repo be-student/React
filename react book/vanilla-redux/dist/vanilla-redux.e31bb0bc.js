@@ -901,7 +901,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var divToggle = document.querySelector("toggle");
+var divToggle = document.querySelector(".toggle");
 var counter = document.querySelector("h1");
 var btnIncrease = document.querySelector("#increase");
 var btnDecrease = document.querySelector("#decrease");
@@ -930,7 +930,7 @@ var decrease = function decrease() {
 
 var initialState = {
   toggle: false,
-  couter: 0
+  counter: 0
 };
 
 function reducer() {
@@ -957,6 +957,35 @@ function reducer() {
       return state;
   }
 }
+
+var store = (0, _redux.createStore)(reducer);
+
+var render = function render() {
+  var state = store.getState();
+
+  if (state.toggle) {
+    divToggle.classList.add("active");
+  } else {
+    divToggle.classList.remove("active");
+  }
+
+  counter.innerText = state.counter;
+};
+
+render();
+store.subscribe(render);
+
+divToggle.onclick = function () {
+  store.dispatch(toggleSwitch());
+};
+
+btnIncrease.onclick = function () {
+  store.dispatch(increase(1));
+};
+
+btnDecrease.onclick = function () {
+  store.dispatch(decrease());
+};
 },{"redux":"node_modules/redux/es/redux.js"}],"../../../AppData/Local/Yarn/Data/global/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -985,7 +1014,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56838" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62229" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
