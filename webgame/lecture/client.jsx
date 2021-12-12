@@ -5,10 +5,10 @@ const ReactDom = require('react-dom');
 const WordRelay = require('./WordRelay');
 //구구단의 제일 밑 부분과 같음.
 ReactDom.render(<WordRelay />, document.querySelector('#root'));*/
-const React = require('react');
-const ReactDom = require('react-dom');
+const React = require("react");
+const ReactDom = require("react-dom");
 
 //wWordRelay.jsx 에서 export 했던 것의 결과물임 효율적임
-const WordRelay = require('./WordRelay');
+const WordRelay = require("./WordRelay");
 
-ReactDom.render(<WordRelay />, document.querySelector('#root'));
+ReactDom.render(<WordRelay />, document.querySelector("#root"));
