@@ -1,5 +1,4 @@
-import { createAction, handleActions } from "redux-actions";
-
+import { handleActions, createAction } from "redux-actions";
 const INCREASE = "counter/INCREASE";
 const DECREASE = "counter/DECREASE";
 

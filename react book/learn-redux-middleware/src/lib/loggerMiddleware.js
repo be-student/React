@@ -1,4 +1,4 @@
-const loggerMiddleware = (store) => (next) => (action) => {
+/*const loggerMiddleware = (store) => (next) => (action) => {
   //미들웨어 기본 구조
   console.group(action && action.type); //액션 타입으로 로그를 그룹화
   console.log("이전 상태", store.getState());
@@ -18,3 +18,4 @@ const loggerMiddleware = (store) => (next) => (action) => {
 //미들웨어 내부에서 store.dispatch를 사용하면 첫 번째 미들웨어부터 다시 시작
 
 export default loggerMiddleware;
+*/
