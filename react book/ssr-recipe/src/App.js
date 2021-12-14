@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router";
 import Menu from "./components/Menu";
 import RedPage from "./pages/RedPage";
 import BluePage from "./pages/BluePage";
+import React from "react";
 
 const App = () => {
   return (
