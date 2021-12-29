@@ -28,14 +28,36 @@
 // app.listen(4000, () => {
 //   console.log('Listening to port 4000');
 // });
-const Koa = require('koa');
-const Router = require('koa-router');
-const bodyParser = require('koa-bodyparser');
 
-const api = require('./api');
+//require('dotenv').config();
+// const Koa = require('koa');
+// const Router = require('koa-router');
+// const bodyParser = require('koa-bodyparser');
+
+// const api = require('./api');
+// const mongoose = require('mongoose');
+import dotenv from 'dotenv';
+dotenv.config();
+import Koa from 'koa';
+import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
+import mongoose from 'mongoose';
+
+import api from './api/index.js';
 
 const app = new Koa();
 const router = new Router();
+
+const { PORT, MONGO_URI } = process.env;
+
+mongoose //useFindAndModify:false는 몽구스 6.0이상부터는 없어도 됨.
+  .connect(MONGO_URI, { useNewUrlParser: true })
+  .then(() => {
+    console.log('Connected to MongoDb');
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 router.use('/api', api.routes());
 router.get('/', (ctx) => {
@@ -60,7 +82,7 @@ router.get('/posts', (ctx) => {
 });
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
-
-app.listen(4000, () => {
-  console.log('Listening to port 4000');
+const port = PORT || 4000;
+app.listen(port, () => {
+  console.log('Listening to port %d', port);
 });
