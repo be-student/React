@@ -44,7 +44,8 @@ import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 
 import api from './api/index.js';
-
+import createFakeData from './createFakeData.js';
+import jwtMiddleware from './lib/jwtMiddleware.js';
 const app = new Koa();
 const router = new Router();
 
@@ -81,6 +82,7 @@ router.get('/posts', (ctx) => {
   ctx.body = id ? `포스트 #${id}의 123` : '123';
 });
 app.use(bodyParser());
+app.use(jwtMiddleware);
 app.use(router.routes()).use(router.allowedMethods());
 const port = PORT || 4000;
 app.listen(port, () => {
