@@ -1,10 +1,14 @@
 import React, { useState, useRef } from "react";
-
-const ResponseCheck = () => {
-  const [state, setState] = useState("waiting");
-  const [message, setMessage] = useState("클릭해서 시작");
-  const [result, setResult] = useState([]);
-
+import "./ResponseCheck.css";
+import { Link } from "react-router-dom";
+const ResponseCheck = ({
+  state,
+  setState,
+  message,
+  setMessage,
+  result,
+  setResult,
+}) => {
   let startTime = useRef(0);
   let timeout = useRef();
   const onReset = () => {
@@ -32,8 +36,16 @@ const ResponseCheck = () => {
     // );
     return result.length === 0 ? null : (
       <div>
+        <ul>
+          {result.map((val, index) => {
+            return <li key={index}>{val}</li>;
+          })}
+        </ul>
         <div>
-          평균 시간 :{result.reduce((a, c) => a + c, 0) / result.length}
+          평균 시간 :
+          {Math.round(result.reduce((a, c) => a + c, 0) * 100) /
+            100 /
+            result.length}
           ms
         </div>
         <button onClick={onReset}>리셋</button>
@@ -57,16 +69,29 @@ const ResponseCheck = () => {
     } else if (state === "now") {
       //반응속도 체크
       let endTime = new Date();
-      setState("waiting");
+
       //setResult([...result, endTime - startTime.current]);
       setResult((prevResult) => [...prevResult, endTime - startTime.current]);
-      setMessage("클릭해서 시작하세요");
+      if (result.length !== 4) {
+        setState("waiting");
+        setMessage("클릭해서 시작하세요");
+        return;
+      } else {
+        setState("end");
+      }
     }
   };
   return (
-    <div>
+    <div className="game__container">
+      <div>{result.length}/5</div>
       <div id="screen" className={state} onClick={onClickScreen}>
-        {message}
+        {result.length === 5 ? (
+          <Link to="/result" className="button">
+            결과 확인
+          </Link>
+        ) : (
+          message
+        )}
       </div>
       {renderAverage()}
     </div>
