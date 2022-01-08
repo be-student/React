@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { check } from '../../modules/user';
-//import { withRouter } from 'react-router-dom';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -77,9 +76,12 @@ const RegisterForm = () => {
   // user 값이 잘 설정되었는지 확인
   useEffect(() => {
     if (user) {
-      console.log('check API 성공');
-      console.log(user);
       navigate('/'); // 홈 화면으로 이동
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log('localStorage is not working');
+      }
     }
   }, [navigate, user]);
 
@@ -93,7 +95,5 @@ const RegisterForm = () => {
     />
   );
 };
-
-//export default withRouter(RegisterForm);
 
 export default RegisterForm;
